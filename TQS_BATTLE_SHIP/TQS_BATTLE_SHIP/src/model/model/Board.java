@@ -30,5 +30,18 @@ public class Board {
     public char[][] getGrid() {
         return grid;
     }
+    
+    public boolean shoot(int x, int y) {
+        if (x < 0 || x >= 10 || y < 0 || y >= 10 || grid[x][y] == 'X' || grid[x][y] == 'O') {
+            return false;
+        }
+        if (grid[x][y] == 'S') {
+            grid[x][y] = 'X'; // Tocado
+            return true;
+        } else {
+            grid[x][y] = 'O'; // Agua
+            return false;
+        }
+    }
 
 }

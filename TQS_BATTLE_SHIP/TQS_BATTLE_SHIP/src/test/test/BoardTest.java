@@ -33,4 +33,15 @@ public class BoardTest {
         }
         assertEquals(5, initialShipCount); 
     }
+    
+    @Test
+    public void testShoot() {
+        Board board = new Board();
+        boolean hit = board.shoot(0, 0);
+        if (board.getGrid()[0][0] == 'X') {
+            assertTrue(hit);
+        } else if (board.getGrid()[0][0] == 'O') {
+            assertFalse(hit);
+        }
+    }
 }
