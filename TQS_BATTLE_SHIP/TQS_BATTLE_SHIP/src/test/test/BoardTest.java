@@ -44,4 +44,18 @@ public class BoardTest {
             assertFalse(hit);
         }
     }
+    
+    @Test
+    public void testAllShipsSunk() {
+        Board board = new Board();
+        // Simula hundir todos los barcos
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (board.getGrid()[i][j] == 'S') {
+                    board.shoot(i, j);
+                }
+            }
+        }
+        assertTrue(board.allShipsSunk());
+    }
 }
