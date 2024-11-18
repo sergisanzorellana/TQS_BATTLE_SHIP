@@ -58,4 +58,17 @@ public class BoardTest {
         }
         assertTrue(board.allShipsSunk());
     }
+    
+    @Test
+    public void testShootOutOfBounds() {
+        Board board = new Board();
+        
+        assertFalse(board.shoot(-1, 0), "Shooting at (-1, 0) should return false.");
+        assertFalse(board.shoot(0, -1), "Shooting at (0, -1) should return false.");
+        assertFalse(board.shoot(10, 0), "Shooting at (10, 0) should return false.");
+        assertFalse(board.shoot(0, 10), "Shooting at (0, 10) should return false.");
+        assertFalse(board.shoot(11, 11), "Shooting at (11, 11) should return false.");
+        assertFalse(board.shoot(-5, -5), "Shooting at (-5, -5) should return false.");
+    }
+    
 }
