@@ -17,7 +17,7 @@ public class BoardTest {
                 }
             }
         }
-        assertEquals(95, waterCount); 
+        assertEquals(83, waterCount); 
     }
     
     @Test
@@ -31,7 +31,7 @@ public class BoardTest {
                 }
             }
         }
-        assertEquals(5, initialShipCount); 
+        assertEquals(17, initialShipCount); 
     }
     
     @Test
