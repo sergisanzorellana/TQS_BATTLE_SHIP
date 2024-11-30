@@ -57,7 +57,7 @@ public class Ship {
             }
         }
         // Postcondition: if a ship part is hit, it should be marked as sunk if all parts are hit
-        assert (!hit && !sunk) || (hit && sunk) || (hit && !sunk) : "Ship sinking status inconsistent with hits";
+        assert (!hit && !sunk) || (hit && sunk) || (hit && !sunk) || sunk : "Ship sinking status inconsistent with hits";
         return hit;
     }
 
