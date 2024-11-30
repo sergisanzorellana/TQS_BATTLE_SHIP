@@ -1,42 +1,77 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 import model.Ship;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 public class ShipTest {
-    @Test
-    public void testShipAttributes() {
-        Ship ship = new Ship(3, "Destroyer");
-        assertEquals(3, ship.getSize());
-        assertEquals("Destroyer", ship.getName());
-        assertFalse(ship.isSunk());
+    private Ship ship;
+
+    @BeforeEach
+    public void setUp() {
+        ship = new Ship(3, "Battleship");
     }
-    
+
+    // Tests for Ship Constructor
+    @Test
+    public void testConstructor() {
+        // Valid constructor
+        Ship validShip = new Ship(2, "Destroyer");
+        assertEquals(2, validShip.getSize());
+        assertEquals("Destroyer", validShip.getName());
+        assertFalse(validShip.isSunk());
+
+        // Invalid size
+        assertThrows(AssertionError.class, () -> new Ship(0, "InvalidShip"));
+
+        // Invalid name
+        assertThrows(AssertionError.class, () -> new Ship(3, ""));
+        assertThrows(AssertionError.class, () -> new Ship(3, null));
+    }
+
+    // Tests for setOccupiedSquares
+    @Test
+    public void testSetOccupiedSquares() {
+        // Valid occupied squares
+        int[][] validSquares = {{1, 1}, {1, 2}, {1, 3}};
+        ship.setOccupiedSquares(validSquares);
+        assertArrayEquals(validSquares, ship.getOccupiedSquares());
+
+        // Invalid length
+        int[][] invalidLengthSquares = {{1, 1}, {1, 2}};
+        assertThrows(AssertionError.class, () -> ship.setOccupiedSquares(invalidLengthSquares));
+
+        // Invalid square format
+        int[][] invalidFormatSquares = {{1, 1}, {1, 2, 3}, {1, 3}};
+        assertThrows(AssertionError.class, () -> ship.setOccupiedSquares(invalidFormatSquares));
+    }
+
+    // Tests for hit
     @Test
     public void testHit() {
-        Ship ship = new Ship(3, "Destroyer");
-        int[][] occupiedSquares = {{0, 0}, {0, 1}, {0, 2}};
-        ship.setOccupiedSquares(occupiedSquares);
+        int[][] squares = {{1, 1}, {1, 2}, {1, 3}};
+        ship.setOccupiedSquares(squares);
 
-        assertTrue(ship.hit(0, 0));
-        assertTrue(ship.hit(0, 1));
-        assertTrue(ship.hit(0, 2));
-        assertFalse(ship.hit(1, 1)); // Miss
-    }
+        // Valid hit
+        assertTrue(ship.hit(1, 1));
+        assertEquals(-1, ship.getOccupiedSquares()[0][0]);
+        assertEquals(-1, ship.getOccupiedSquares()[0][1]);
 
-    @Test
-    public void testSunk() {
-        Ship ship = new Ship(3, "Destroyer");
-        int[][] occupiedSquares = {{0, 0}, {0, 1}, {0, 2}};
-        ship.setOccupiedSquares(occupiedSquares);
+        // Miss
+        assertFalse(ship.hit(2, 2));
 
-        ship.hit(0, 0);
-        ship.hit(0, 1);
-        ship.hit(0, 2);
-
+        // Check sunk after all hits
+        ship.hit(1, 2);
+        ship.hit(1, 3);
         assertTrue(ship.isSunk());
+
+        // Check not sunk if not all parts are hit
+        Ship anotherShip = new Ship(3, "Cruiser");
+        anotherShip.setOccupiedSquares(squares);
+        anotherShip.hit(1, 1);
+        anotherShip.hit(1, 2);
+        assertFalse(anotherShip.isSunk());
     }
 }
-
-
