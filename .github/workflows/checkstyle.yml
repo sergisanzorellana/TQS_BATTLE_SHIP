@@ -32,5 +32,8 @@ jobs:
     - name: Install dependencies
       run: mvn install -DskipTests -Dcheckstyle.skip
 
+    - name: List files
+      run: ls -R
+
     - name: Run Checkstyle
       run: mvn checkstyle:check
