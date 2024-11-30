@@ -46,6 +46,17 @@ public class ShipTest {
         // Invalid square format
         int[][] invalidFormatSquares = {{1, 1}, {1, 2, 3}, {1, 3}};
         assertThrows(AssertionError.class, () -> ship.setOccupiedSquares(invalidFormatSquares));
+
+        // Null occupied squares
+        assertThrows(AssertionError.class, () -> ship.setOccupiedSquares(null));
+
+        // Null individual square
+        int[][] nullSquare = {{1, 1}, null, {1, 3}};
+        assertThrows(AssertionError.class, () -> ship.setOccupiedSquares(nullSquare));
+
+        // Invalid coordinate length
+        int[][] invalidCoordinateLength = {{1, 1}, {1}, {1, 3}};
+        assertThrows(AssertionError.class, () -> ship.setOccupiedSquares(invalidCoordinateLength));
     }
 
     // Tests for hit
@@ -54,6 +65,12 @@ public class ShipTest {
         int[][] squares = {{1, 1}, {1, 2}, {1, 3}};
         ship.setOccupiedSquares(squares);
 
+        // Ensure occupiedSquares is not null
+        assertThrows(AssertionError.class, () -> {
+            Ship anotherShip = new Ship(3, "Cruiser");
+            anotherShip.hit(1, 1);
+        });
+
         // Valid hit
         assertTrue(ship.hit(1, 1));
         assertEquals(-1, ship.getOccupiedSquares()[0][0]);
@@ -61,6 +78,8 @@ public class ShipTest {
 
         // Miss
         assertFalse(ship.hit(2, 2));
+        assertFalse(ship.hit(1, 0));
+        assertFalse(ship.hit(0, 1));
 
         // Check sunk after all hits
         ship.hit(1, 2);
@@ -69,9 +88,10 @@ public class ShipTest {
 
         // Check not sunk if not all parts are hit
         Ship anotherShip = new Ship(3, "Cruiser");
-        anotherShip.setOccupiedSquares(squares);
-        anotherShip.hit(1, 1);
-        anotherShip.hit(1, 2);
-        assertFalse(anotherShip.isSunk());
+        anotherShip.setOccupiedSquares(new int[][] {{2, 1}, {2, 2}, {2, 3}});
+        anotherShip.hit(2, 1);
+        anotherShip.hit(2, 2);
+        assertFalse(anotherShip.isSunk()); 
+        
     }
 }
