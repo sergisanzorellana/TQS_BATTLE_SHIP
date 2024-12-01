@@ -1,13 +1,14 @@
 package controller;
 
-import model.Board;
+import model.Player;
 import view.BattleshipView;
 
 public class Main {
     public static void main(String[] args) {
-        Board board = new Board();
         BattleshipView view = new BattleshipView();
-        BattleshipController controller = new BattleshipController(board, view);
+        Player player = new Player("player 1", false);
+        Player ai = new Player("ai", true);
+        BattleshipController controller = new BattleshipController(player, ai, view);
         controller.startGame();
     }
 }
