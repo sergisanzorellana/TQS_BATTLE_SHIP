@@ -3,7 +3,11 @@
   <groupId>TQS_BATTLE_SHIP</groupId>
   <artifactId>TQS_BATTLE_SHIP</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <dependencies>
     <!-- JUnit Jupiter API dependency for testing -->
     <dependency>
@@ -36,7 +40,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <release>22</release>
+          <release>11</release> <!-- Change this to a supported version -->
         </configuration>
       </plugin>
     </plugins>
