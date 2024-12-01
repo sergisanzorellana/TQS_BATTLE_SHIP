@@ -28,10 +28,10 @@ jobs:
           ${{ runner.os }}-maven-
 
     - name: Install dependencies
-      run: mvn install -DskipTests -Dcheckstyle.skip
+      run: mvn install -DskipTests -Dcheckstyle.skip -X
 
     - name: List files
       run: ls -R
 
     - name: Run Checkstyle
-      run: mvn checkstyle:check -Dcheckstyle.config.location=./checkstyle.xml
+      run: mvn checkstyle:check -Dcheckstyle.config.location=./checkstyle.xml -X
