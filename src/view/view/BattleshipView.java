@@ -58,10 +58,17 @@ public class BattleshipView {
     }
 
     public int[] getMove() {
-        System.out.println("Enter coordinates for your shot (column and row): ");
-        int x = scanner.nextInt();
-        int y = scanner.nextInt();
-        return new int[]{y, x};
+        while (true) {
+            System.out.println("Enter coordinates for your shot (column and row): ");
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+
+            if (x >= 0 && x < 10 && y >= 0 && y < 10) {
+                return new int[]{y, x};
+            } else {
+                System.out.println("Invalid coordinates. Please enter values between 0 and 9.");
+            }
+        }
     }
 
     public void displayGameOver() {
