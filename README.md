@@ -1,1 +1,1 @@
-This is the test branch
+Branca principal pel desenvolupament d'un projecte (BattleShip) fent servir TDD
