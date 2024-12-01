@@ -5,47 +5,47 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-  </properties>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <maven.compiler.source>17</maven.compiler.source>
+  <maven.compiler.target>17</maven.compiler.target>
+</properties>
 
-  <dependencies>
-    <!-- JUnit Jupiter API dependency for testing -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.8.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.8.2</version>
-      <scope>test</scope>
-    </dependency>
-    
-    <!-- Mockito dependency for mocking -->
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>4.0.0</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+<dependencies>
+  <!-- JUnit Jupiter API dependency for testing -->
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.8.2</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-engine</artifactId>
+    <version>5.8.2</version>
+    <scope>test</scope>
+  </dependency>
   
-  <build>
-    <sourceDirectory>src/controller</sourceDirectory>
-    <testSourceDirectory>src/test</testSourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>22</source>
-          <target>22</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  <!-- Mockito dependency for mocking -->
+  <dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>4.0.0</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+
+<build>
+  <sourceDirectory>src/main/java</sourceDirectory>
+  <testSourceDirectory>src/test/java</testSourceDirectory>
+  <plugins>
+    <plugin>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.8.1</version>
+      <configuration>
+        <source>17</source>
+        <target>17</target>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
 </project>
