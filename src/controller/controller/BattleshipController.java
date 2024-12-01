@@ -55,13 +55,16 @@ public class BattleshipController {
                 int y = rand.nextInt(10);
                 boolean horizontal = rand.nextBoolean();
                 int size = getShipSize(shipName);
-                ShipPlacement placement = new ShipPlacement(x, y, size, shipName, horizontal);
-                try {
-                    ai.getBoard().placeShip(placement);
-                    placed = true;
-                } catch (IllegalArgumentException e) {
-                    // Ship placement failed, generate new coordinates and try again
-                    System.out.println("Failed to place " + shipName + " at (" + x + ", " + y + ") horizontally: " + horizontal + ". Retrying...");
+
+                // Validate coordinates to ensure the ship fits within the grid
+                if ((!horizontal && y + size - 1 < 10) || (horizontal && x + size - 1 < 10)) {
+                    ShipPlacement placement = new ShipPlacement(x, y, size, shipName, horizontal);
+                    try {
+                        ai.getBoard().placeShip(placement);
+                        placed = true;
+                    } catch (IllegalArgumentException e) {
+                        // Ship placement failed, generate new coordinates and try again
+                    }
                 }
             }
         }
@@ -86,9 +89,12 @@ public class BattleshipController {
             view.displayPublicBoard(defender.getBoard());
             coordinates = view.getMove();
         }
-        boolean hit = defender.getBoard().shoot(coordinates[0], coordinates[1]);
+        boolean hit;
         if (attacker.isAI()) {
             view.displayBoard(defender.getBoard());
+            hit = defender.getBoard().shoot(coordinates[0], coordinates[1]);
+        } else {
+        	hit = defender.getBoard().shoot(coordinates[0], coordinates[1]);	
         }
         view.displayShotResult(hit);
     }

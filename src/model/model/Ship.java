@@ -48,7 +48,7 @@ public class Ship {
         assert occupiedSquares != null : "Occupied squares must be set before hitting"; // Precondition: occupiedSquares must be set
         boolean hit = false;
         for (int i = 0; i < size; i++) {
-            if (occupiedSquares[i][0] == x && occupiedSquares[i][1] == y) {
+            if (occupiedSquares[i][1] == x && occupiedSquares[i][0] == y) {
                 occupiedSquares[i][0] = -1; // Mark as hit
                 occupiedSquares[i][1] = -1;
                 checkSunk();

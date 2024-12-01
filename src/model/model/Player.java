@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import controller.AIController;
 
 public class Player {
@@ -55,4 +57,9 @@ public class Player {
             return new int[]{0, 0}; // Placeholder for human player moves
         }
     }
+
+	public List<ShipPlacement> getShipPlacements() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
